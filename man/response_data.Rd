@@ -7,7 +7,7 @@
 \format{A data frame with 1564 rows and 5 variables:
 \describe{
   \item{year}{as integer}
-  \item{count}{An environmental count variable}
+  \item{counts}{An environmental count variable}
   \item{Location}{character, label for location}
   \item{offset}{log of an offset for count models (e.g. area or time exposed)}
   \item{x1}{An environmental covariate measured once per year at each location, standardized.}

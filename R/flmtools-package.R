@@ -1,5 +1,4 @@
 #' @keywords internal
-#' @importFrom dplyr common_by_from_vector
 "_PACKAGE"
 
 # The following block is used by usethis to automatically manage

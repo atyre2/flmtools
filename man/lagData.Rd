@@ -30,7 +30,6 @@ and a second with the indices used in the smooth term from mgcv.
 \details{
 Assumes that lagData have already been aggregated to the appropriate resolution.
 lagData should have \code{nrows(response)*nUnits - startUnit} *not true.
-matchon should break response down to one row per combination.
 }
 \examples{
 test <- lagData(env_data, response_data, unit = "month", 6, 24, "envVar")

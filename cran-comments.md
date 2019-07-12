@@ -6,3 +6,21 @@
 
 
 ## R CMD check results
+
+This is the first submission of this package.
+
+There were no Errors or Warnings. 
+
+There was one note:
+
+*  checking R code for possible problems ... NOTE
+   simResponse: no visible binding for global variable ‘rnorm’
+   Undefined global functions or variables:
+     rnorm
+   Consider adding
+     importFrom("stats", "rnorm")
+   to your NAMESPACE file.
+   
+   Adding this importFrom generates an Error that it is unneccesary to importFrom
+   stats.
+
