@@ -2,3 +2,9 @@
 ^\.Rproj\.user$
 ^data-raw$
 ^LICENSE\.md$
+^\.github$
+^README\.Rmd$
+^\.travis\.yml$
+^codecov\.yml$
+^\.covrignore$
+^cran-comments.md$

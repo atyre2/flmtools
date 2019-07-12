@@ -3,14 +3,16 @@ Version: 0.0.0.9000
 Title: Utilities for working with Functional Linear Models
 Description: Functional Linear Models allow matrix covariates, but arranging the data and working with the outputs is difficult. These functions aim to make life easier, mostly for the author.
 Authors@R: person("Andrew", "Tyre", , "atyre2@unl.edu", c("aut", "cre"))
-Depends: R (>= 2.10)
+Depends: 
+    R (>= 3.1)
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 ByteCompile: true
 RoxygenNote: 6.0.1
 Suggests: 
-    testthat
+    testthat,
+    covr
 Imports: 
     mgcv,
     dplyr

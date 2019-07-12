@@ -79,14 +79,25 @@ lagData2 <- function(response, lagData, matchon, matchtime, nUnits){
   startUnit <- response[1,matchtimevars$x[2], drop = TRUE] # assume they are all the same - # better: check!
   Unit2 <- unique(lagData[, matchtimevars$y[2]])
   Unit1 <- unique(lagData[, matchtimevars$y[1]])
-  laggedUnits2 <- rep(startUnit, times = nUnits + 1) - 0:nUnits
+  difUnits2 <- rep(startUnit, times = nUnits + 1) - 0:nUnits
   tmptable <- response[,c(matchonvars$x, matchtimevars$x)]
-  tmptable <- cbind(tmptable, matrix(laggedUnits2, nrow = N, ncol = nUnits + 1, byrow = TRUE))
-  tmptable <- tidyr::gather(tmptable, key = "key", value = "laggedUnit2", (length(c(matchonvars$x, matchtimevars$x))+1):ncol(tmptable))
-  tmptable[,matchtimevars$x[1]] <- tmptable[,matchtimevars$x[1]] + (tmptable[,"laggedUnit2"] - 1) %/% period
-  tmptable[,matchtimevars$x[2]] <- tmptable[,"laggedUnit2"] %% period
-  tmptable[,matchtimevars$x[2]][tmptable[,matchtimevars$x[2]] == 0] <- period
-
-  return(tmptable)
+  tmptable <- cbind(tmptable, matrix(difUnits2, nrow = N, ncol = nUnits + 1, byrow = TRUE))
+  tmptable <- tidyr::gather(tmptable, key = "key", value = "difUnit2", (length(c(matchonvars$x, matchtimevars$x))+1):ncol(tmptable))
+  tmptable[,"laggedUnit1"] <- tmptable[,matchtimevars$x[1]] + (tmptable[,"difUnit2"] - 1) %/% period
+  tmptable[,"laggedUnit2"] <- tmptable[,"difUnit2"] %% period
+  tmptable[,"laggedUnit2"][tmptable[,"laggedUnit2"] == 0] <- period
+  # this next will fail if the matching variable names are not the same in the
+  # two data frames
+  allby <- c(matchonvars$x, matchtimevars$x)
+  names(allby) <- c(matchonvars$x, "laggedUnit1", "laggedUnit2")
+  tmptable <- dplyr::left_join(tmptable, lagData, by = allby)
+  # spread to get the bymatrix
+  # FIX: get the name of the environment variable somehow
+  tmptable <- dplyr::select(tmptable, matchonvars$x, matchtimevars$x, key, envVar)
+  bymatrix <- tidyr::spread(tmptable, key = key, value = envVar)
+  id_length <- length(allby)
+  num_names <- as.numeric(names(bymatrix)[(id_length+1):ncol(bymatrix)])
+  bymatrix[,"byVar"] <- as.matrix(bymatrix[, order(num_names) + id_length])
+  return(bymatrix)
 }
 
