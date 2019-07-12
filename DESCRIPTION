@@ -1,6 +1,6 @@
 Package: flmtools
 Version: 0.0.0.9000
-Title: Utilities for working with Functional Linear Models
+Title: Utilities for Working with Functional Linear Models
 Description: Functional Linear Models allow matrix covariates, but arranging the data and working with the outputs is difficult. These functions aim to make life easier, mostly for the author.
 Authors@R: person("Andrew", "Tyre", , "atyre2@unl.edu", c("aut", "cre"))
 Depends: 
