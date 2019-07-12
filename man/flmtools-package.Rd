@@ -4,7 +4,7 @@
 \name{flmtools-package}
 \alias{flmtools}
 \alias{flmtools-package}
-\title{flmtools: Utilities for working with Functional Linear Models}
+\title{flmtools: Utilities for Working with Functional Linear Models}
 \description{
 Functional Linear Models allow matrix covariates, but arranging the data and working with the outputs is difficult. These functions aim to make life easier, mostly for the author.
 }
