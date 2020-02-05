@@ -2,3 +2,11 @@
 
 language: R
 cache: packages
+
+r:
+  - devel
+  - release
+    after_success:
+    - Rscript -e 'covr::codecov()'
+  - oldrel
+  - 3.4
