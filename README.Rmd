@@ -15,8 +15,10 @@ knitr::opts_chunk$set(
 # flmtools
 
 <!-- badges: start -->
-[![Build Status](https://travis-ci.com/atyre2/flmtools.svg?branch=master)](https://travis-ci.com/atyre2/flmtools)
+[![Travis Build Status](https://travis-ci.com/atyre2/flmtools.svg?branch=master)](https://travis-ci.com/atyre2/flmtools)
+[![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/atyre2/flmtools?branch=master&svg=true)](https://ci.appveyor.com/project/atyre2/flmtools)
 [![codecov](https://codecov.io/gh/atyre2/flmtools/branch/master/graph/badge.svg)](https://codecov.io/gh/atyre2/flmtools)
+
 <!-- badges: end -->
 
 Functions for working with Functional Linear Models fit by package mgcv
