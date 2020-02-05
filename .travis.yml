@@ -1,16 +1,4 @@
 # R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
 
-language: r
+language: R
 cache: packages
-
-# do not build vignettes...takes too long and times out on travis
-r_build_args: --no-build-vignettes --no-manual
-r_check_args: --no-build-vignettes --no-manual --timings
-
-r:
-  - devel
-  - release
-    after_success:
-    - Rscript -e 'covr::codecov()'
-  - oldrel
-  - 3.4
