@@ -11,3 +11,9 @@ test_that("lagData output correct", {
   expect_equivalent(test$envVar_6_24, test_6_24$envVar_6_24)
   expect_equivalent(test$lag_6_24+1, test_6_24$lag_6_24)
 })
+
+test_that("different lags work",{
+  expect_silent(lagData(env_data, response_data, unit = "month", 6, 18, "envVar"))
+  expect_silent(lagData(env_data, response_data, unit = "month", 5, 18, "envVar"))
+  expect_silent(lagData(env_data, response_data, unit = "month", 5, 20, "envVar"))
+})
