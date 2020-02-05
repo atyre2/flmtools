@@ -23,7 +23,7 @@
 #' summary(fit2)
 #'
 
-simResponse <- function(x, mu, rfunc = rnorm, ...){
+simResponse <- function(x, mu, rfunc = stats::rnorm, ...){
   resp_expr <- substitute(mu)
   mean_resp <- eval(resp_expr, envir = x)
   xp <- cbind(x, mu = mean_resp, response = rfunc(nrow(x), mean_resp, ...))

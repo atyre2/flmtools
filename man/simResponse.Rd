@@ -4,7 +4,7 @@
 \alias{simResponse}
 \title{Simulate response data given input lagged env data and an expression}
 \usage{
-simResponse(x, mu, rfunc = rnorm, ...)
+simResponse(x, mu, rfunc = stats::rnorm, ...)
 }
 \arguments{
 \item{x}{data.frame containing at least 1 matrix column of lagged data}
