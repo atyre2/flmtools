@@ -10,8 +10,8 @@
 #' @param lagData data.frame or tibble containing the predictor variables to be created as lags. Must be sorted by Location, year, month.
 #' @param response data.frame or tibble with the response and one-per-case covariates
 #' @param unit character string variable name in lagData by which to lag
-#' @param startUnit integer where to start the lagging
-#' @param nUnits integer how many rows to lag backwards
+#' @param startUnit integer representing which month (or other time unit) to start the lagging
+#' @param nUnits integer representing how many time units to lag backwards from startUnit
 #' @param measure character string name of column in lagData to convert to matrices
 #'
 #' @return returns a dataframe or tibble with as many rows as response, and two
@@ -21,7 +21,7 @@
 #' @examples
 #' test <- lagData(env_data, response_data, unit = "month", 6, 24, "envVar")
 #' dim(test$envVar_6_24)
-#' test$lag_6_24[1:5,1:5]
+#' test$envVar_6_24[1:5,1:5]
 
 lagData <- function(lagData, response, unit, startUnit, nUnits, measure){
   period <- max(lagData[,unit])

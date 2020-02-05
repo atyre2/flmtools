@@ -39,7 +39,7 @@ This is a basic example which shows you how to solve a common problem:
 library(flmtools)
 test <- lagData(env_data, response_data, unit = "month", 6, 24, "envVar")
 dim(test$envVar_6_24)
-test$lag_6_24[1:5,1:5]
+test$envVar_6_24[1:5,1:5]
 ```
 
 ## Code of Conduct
