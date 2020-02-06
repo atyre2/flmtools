@@ -36,7 +36,7 @@ lagData <- function(lagData, response, unit, startUnit, nUnits, measure){
     # logical vector to pull out the right part of envData
     pick <- with(lagData, year %in% startYear:endYear & Location == startLocation)
     # Our window is inside this subset
-    nvSubset <- lagData[pick, measure]
+    nvSubset <- lagData[pick, measure, drop = TRUE]
     startRow <- length(nvSubset) - (period - startUnit)
     endRow <- startRow - nUnits
     byMatrix[row, ] <- nvSubset[startRow:endRow]
