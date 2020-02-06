@@ -32,11 +32,14 @@ lagData <- function(lagData, response, unit, startUnit, nUnits, measure){
     # find the starting point
     startYear <- response[row, "year", drop = TRUE] # year and Location
     startLocation <- response[row, "Location", drop = TRUE]
-    endYear <- startYear - floor(nUnits/period) # if nUnits < period then endYear == startYear
+    endYear <- startYear - ceiling(nUnits/period) # endYear always at least 1 less than startYear
     # logical vector to pull out the right part of envData
     pick <- with(lagData, year %in% startYear:endYear & Location == startLocation)
-    # pack it in reverse order! first column is year, month == startUnit
-    byMatrix[row, ] <- rev(lagData[pick, measure, drop=TRUE][startUnit:(nUnits + period - startUnit)])
+    # Our window is inside this subset
+    nvSubset <- lagData[pick, measure]
+    startRow <- length(nvSubset) - (period - startUnit)
+    endRow <- startRow - nUnits
+    byMatrix[row, ] <- nvSubset[startRow:endRow]
   }
   byMatName <- paste(measure, startUnit, nUnits, sep = "_")
   lagMatName <- paste("lag", startUnit, nUnits, sep = "_")
