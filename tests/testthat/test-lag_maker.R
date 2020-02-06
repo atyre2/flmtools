@@ -13,7 +13,7 @@ test_that("lagData output correct", {
 })
 
 test_that("different lags work",{
-  expect_silent(lagData(env_data, response_data, unit = "month", 6, 18, "envVar"))
-  expect_silent(lagData(env_data, response_data, unit = "month", 5, 18, "envVar"))
-  expect_silent(lagData(env_data, response_data, unit = "month", 5, 20, "envVar"))
+  expect_silent(lagData(env_data, response_data[1,], unit = "month", 6, 18, "envVar"))
+  expect_silent(lagData(env_data, response_data[1,], unit = "month", 5, 18, "envVar"))
+  expect_silent(lagData(env_data, response_data[1,], unit = "month", 5, 20, "envVar"))
 })
