@@ -5,6 +5,7 @@
 #' and a second with the indices used in the smooth term from mgcv.
 #'
 #' Assumes that lagData have already been aggregated to the appropriate resolution.
+#' Assumes that lagData and response have and are sorted by columns named year and Location
 #' lagData should have \code{nrows(response)*nUnits - startUnit} *not true.
 #'
 #' @param lagData data.frame or tibble containing the predictor variables to be created as lags. Must be sorted by Location, year, month.
