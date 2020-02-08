@@ -17,3 +17,8 @@ test_that("different lags work",{
   expect_silent(lagData(env_data, response_data[1,], unit = "month", 5, 18, "envVar"))
   expect_silent(lagData(env_data, response_data[1,], unit = "month", 5, 20, "envVar"))
 })
+
+# internal dataframes
+test_that("missing data handled gracefully",{
+  expect_silent(lagData(missing1location, small_response, unit = "month", 6, 18, "envVar"))
+})
