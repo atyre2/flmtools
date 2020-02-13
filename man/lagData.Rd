@@ -4,7 +4,8 @@
 \alias{lagData}
 \title{Convert many-obs-per case data into lagged matrices}
 \usage{
-lagData(lagData, response, unit, startUnit, nUnits, measure)
+lagData(lagData, response, unit, startUnit, nUnits, measure,
+  verbosity = 1)
 }
 \arguments{
 \item{lagData}{data.frame or tibble containing the predictor variables to be created as lags. Must be sorted by Location, year, month.}
@@ -13,11 +14,13 @@ lagData(lagData, response, unit, startUnit, nUnits, measure)
 
 \item{unit}{character string variable name in lagData by which to lag}
 
-\item{startUnit}{integer where to start the lagging}
+\item{startUnit}{integer representing which month (or other time unit) to start the lagging}
 
-\item{nUnits}{integer how many rows to lag backwards}
+\item{nUnits}{integer representing how many time units to lag backwards from startUnit}
 
 \item{measure}{character string name of column in lagData to convert to matrices}
+
+\item{verbosity}{set to 0 or negative to supress warnings.}
 }
 \value{
 returns a dataframe or tibble with as many rows as response, and two
@@ -29,10 +32,12 @@ and a second with the indices used in the smooth term from mgcv.
 }
 \details{
 Assumes that lagData have already been aggregated to the appropriate resolution.
-lagData should have \code{nrows(response)*nUnits - startUnit} *not true.
+Assumes that lagData and response have and are sorted by columns named year and Location
+lagData should have at least \code{nrows(response)*period + (nUnits - startUnit)} rows,
+where period is the number of unit in a year.
 }
 \examples{
 test <- lagData(env_data, response_data, unit = "month", 6, 24, "envVar")
 dim(test$envVar_6_24)
-test$lag_6_24[1:5,1:5]
+test$envVar_6_24[1:5,1:5]
 }
