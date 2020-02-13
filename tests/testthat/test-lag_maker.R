@@ -21,4 +21,10 @@ test_that("different lags work",{
 # internal dataframes
 test_that("missing data handled gracefully",{
   expect_warning(lagData(missing1location, small_response, unit = "month", 6, 18, "envVar"))
+  expect_warning(lagData(missing1year, small_response, unit = "month", 6, 18, "envVar"))
+})
+
+test_that("verbosity argument works",{
+  expect_silent(lagData(missing1location, small_response, unit = "month", 6, 18, "envVar", verbosity = 0))
+  expect_silent(lagData(missing1year, small_response, unit = "month", 6, 18, "envVar", verbosity = 0))
 })

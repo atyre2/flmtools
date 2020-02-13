@@ -35,7 +35,8 @@ lagData <- function(lagData, response, unit, startUnit, nUnits, measure, verbosi
     endYear <- startYear - ceiling(nUnits/period) # endYear always at least 1 less than startYear
     # logical vector to pull out the right part of envData
     pick <- with(lagData, year %in% startYear:endYear & Location == startLocation)
-    if (sum(pick)>0){
+    found <- sum(pick)
+    if (found > 0 & found == (startYear - endYear + 1)*period){
       # Our window is inside this subset
       nvSubset <- lagData[pick, measure, drop = TRUE]
       startRow <- length(nvSubset) - (period - startUnit)
