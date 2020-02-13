@@ -24,7 +24,7 @@
 #' dim(test$envVar_6_24)
 #' test$envVar_6_24[1:5,1:5]
 
-lagData <- function(lagData, response, unit, startUnit, nUnits, measure){
+lagData <- function(lagData, response, unit, startUnit, nUnits, measure, verbosity = 1){
   period <- max(lagData[,unit])
   N <- nrow(response)
   byMatrix <- matrix(NA, nrow = N, ncol = nUnits+1)
@@ -35,11 +35,20 @@ lagData <- function(lagData, response, unit, startUnit, nUnits, measure){
     endYear <- startYear - ceiling(nUnits/period) # endYear always at least 1 less than startYear
     # logical vector to pull out the right part of envData
     pick <- with(lagData, year %in% startYear:endYear & Location == startLocation)
-    # Our window is inside this subset
-    nvSubset <- lagData[pick, measure, drop = TRUE]
-    startRow <- length(nvSubset) - (period - startUnit)
-    endRow <- startRow - nUnits
-    byMatrix[row, ] <- nvSubset[startRow:endRow]
+    if (sum(pick)>0){
+      # Our window is inside this subset
+      nvSubset <- lagData[pick, measure, drop = TRUE]
+      startRow <- length(nvSubset) - (period - startUnit)
+      endRow <- startRow - nUnits
+      byMatrix[row, ] <- nvSubset[startRow:endRow]
+    } else {
+      # either year or Location missing in lagData
+      if (verbosity > 0){
+        warning(sprintf("year or location missing in lagData: row %d of response.\\n
+                        Setting bymatrix[%d,] to NA", row, row))
+      }
+      byMatrix[row, ] <- NA
+    }
   }
   byMatName <- paste(measure, startUnit, nUnits, sep = "_")
   lagMatName <- paste("lag", startUnit, nUnits, sep = "_")
