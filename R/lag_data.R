@@ -6,7 +6,8 @@
 #'
 #' Assumes that lagData have already been aggregated to the appropriate resolution.
 #' Assumes that lagData and response have and are sorted by columns named year and Location
-#' lagData should have \code{nrows(response)*nUnits - startUnit} *not true.
+#' lagData should have at least \code{nrows(response)*period + (nUnits - startUnit)} rows,
+#' where period is the number of unit in a year.
 #'
 #' @param lagData data.frame or tibble containing the predictor variables to be created as lags. Must be sorted by Location, year, month.
 #' @param response data.frame or tibble with the response and one-per-case covariates
@@ -14,6 +15,7 @@
 #' @param startUnit integer representing which month (or other time unit) to start the lagging
 #' @param nUnits integer representing how many time units to lag backwards from startUnit
 #' @param measure character string name of column in lagData to convert to matrices
+#' @param verbosity set to 0 or negative to supress warnings.
 #'
 #' @return returns a dataframe or tibble with as many rows as response, and two
 #' new matrix columns
